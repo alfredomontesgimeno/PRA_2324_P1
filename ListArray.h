@@ -1,14 +1,11 @@
 #ifndef LISTARRAY_H
 #define LISTARRAY_H
 #include <iostream>
-#include <ostream>
+#include <stdexcept>
 #include "List.h"
-
 using namespace std;
-
-template <typename T> 
-class ListArray : public List<T> {
-
+template <typename T>
+class ListArray : public List<T>{
 	private:
 		T* arr;
 		int max;
@@ -16,18 +13,13 @@ class ListArray : public List<T> {
 		static const int MINSIZE = 2;
 		void resize(int new_size){
 			T* new_arr = new T[new_size];
-			for(int i= 0; i < new_size; i++){
+			for(int i = 0; i < new_size; i++){
 				new_arr[i] = arr[i];
-
 			}
 			delete[] arr;
 			arr = new_arr;
 			max = new_size;
-		
 		}
-
-        
-
 	public:
 		ListArray(){
 			arr = new T[MINSIZE];
@@ -37,7 +29,7 @@ class ListArray : public List<T> {
 		~ListArray(){
 			delete[] arr;
 		}
-		void insert(int pos, T e) override{
+		void insert(int pos, T e){
 			if(pos < 0 || pos > n){
 				throw out_of_range("Posicion fuera de rango");
 			}
@@ -50,13 +42,13 @@ class ListArray : public List<T> {
 			arr[pos] = e;
 			n++;
 		}
-		void append(T e) override{
+		void append(T e) {
 			insert(n, e);
 		}
-		void prepend(T e) override{
+		void prepend(T e){
 			insert(0, e);
 		}
-		T remove(int pos) override{
+		T remove(int pos){
 			if(pos < 0 || pos >= n){
 				throw out_of_range("Posicion fuera de rango");
 			}
@@ -70,13 +62,13 @@ class ListArray : public List<T> {
 			}
 			return x;
 		}
-		T get(int pos) override{
+		T get(int pos){
 			if(pos < 0 || pos >= n){
 				throw out_of_range("Posicion fuera de rango");
 			}
 			return arr[pos];
 		}
-		int search(T e) override{
+		int search(T e){
 			for(int i = 0; i < n; i++){
 				if(arr[i] == e){
 					return i;
@@ -84,10 +76,10 @@ class ListArray : public List<T> {
 			}
 			return -1;
 		}
-		bool empty() override{
+		bool empty(){
 			return n == 0;
 		}
-		int size() override{
+		int size(){
 			return n;
 		}
 		T operator[](int pos){
@@ -107,12 +99,7 @@ class ListArray : public List<T> {
 			}
 			out << "]";
 			return out;
-		}
+		};
 
 };
 #endif
-
-
-			
-        
-
