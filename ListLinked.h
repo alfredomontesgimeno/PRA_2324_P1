@@ -2,6 +2,8 @@
 #include "List.h"
 #include "Node.h"
 #include "ListArray.h"
+#ifndef LISTLINKED_H
+#define LISTLINKED_H
 using namespace std;
 
 template <typename T>
@@ -40,10 +42,11 @@ public:
 		}
 		return current->data;
 	}
-	friend ostream &operator<<(ostream &out, const ListLinked<T> &list) 
-	{
-		out << list->first->data;
-		return out;
+	friend ostream& operator<<(ostream& out, const ListLinked<T>& list) {
+        if (list.first != nullptr) {
+            out << list.first->data;
+        }
+        return out;
 	}
 	void insert(int pos, T e) {
 		if(pos < 0 || pos > n) throw std::out_of_range("Posición fuera del rango de la array");
@@ -128,3 +131,4 @@ public:
 		return n;
 	}
 };
+#endif
